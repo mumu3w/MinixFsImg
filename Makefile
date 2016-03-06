@@ -2,8 +2,8 @@ RM		= -del
 CP		= copy
 CC		= gcc
 AR		= ar
-CFLAGS	= -g -DDEBUG -Werror -I./inc
-LDFLAGS	= -L. -lminixfs_v1
+CFLAGS	= -g -Werror -I./inc
+LDFLAGS	= -s -L. -lminixfs_v1
 
 
 APPS	= MinixFsImg

@@ -9,14 +9,16 @@
 *****************************************************************************/
 static int match(int namelen, const char *name, struct dir_entry *de)
 {
-    if(!de || !de->ino || namelen > NAME_LEN - 1)
+    if(!de || !de->ino || namelen > NAME_LEN)
     {
         printl(__FILE__, __LINE__, 
                     "match(): (!de || !de->ino || namelen > NAME_LEN)\n");
+		printl(__FILE__, __LINE__, 
+                    "match(): %s\n", name);
         return 0;
     }
     
-    if(!strncmp(de->name, name, NAME_LEN))
+    if(!strncmp(de->name, name, namelen))
     {
         return 1;
     }
@@ -36,10 +38,10 @@ struct buf *find_entry(struct m_inode **dir, char *name, int namelen,
     struct buf *bp;
     struct dir_entry *de;
     
-    if(namelen > NAME_LEN - 1 || !namelen)
+    if(namelen > NAME_LEN || !namelen)
     {
         printl(__FILE__, __LINE__, 
-                    "find_entry(): (namelen > NAME_LEN - 1 || !namelen)\n");
+                    "find_entry(): (namelen > NAME_LEN || !namelen)\n");
         return NULL;
     }
     
@@ -140,7 +142,7 @@ struct m_inode *get_dir(uint super_block_id, char *pathname)
             return NULL;
         }
         
-        for(namelen = 0; (c = *pathname++)&&(c != '/'); namelen++)
+        for(namelen = 0; (c = *(pathname++))&&(c != '/'); namelen++)
         {
             // nothing
         }

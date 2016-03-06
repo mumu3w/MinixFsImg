@@ -18,12 +18,13 @@ void constructor(char *minixfs_v1_image_name)
         panic(__FILE__, __LINE__, "constructor(): \"%s\" Can't open\n", 
                                             minixfs_v1_image_name);
     }
-    
+#ifdef DEBUG    
     if(NULL == (minixfs_v1_log_fp = fopen(LOG_NAME, "w")))
     {
         panic(__FILE__, __LINE__, "constructor(): \"%s\" Can't open\n", 
                                             LOG_NAME);
     }
+#endif
 }
 
 /*****************************************************************************
@@ -35,9 +36,10 @@ void destructor(void)
     {
         fclose(minixfs_v1_image_fp);
     }
-    
+#ifdef DEBUG 
     if(minixfs_v1_log_fp != NULL)
     {
         fclose(minixfs_v1_image_fp);
     }
+#endif
 }

@@ -28,10 +28,15 @@ void printl(char *src_file, int src_line, const char *format, ...)
     va_list ap;
 
     va_start(ap, format);
-    fprintf(minixfs_v1_log_fp, "%s:%d:", src_file, src_line);
+#ifdef DEBUG
+#ifdef LOG
+	fprintf(minixfs_v1_log_fp, "%s:%d:", src_file, src_line);
     vfprintf(minixfs_v1_log_fp, format, ap);
-    //fprintf(stderr, "%s:%d:", src_file, src_line);
-    //vfprintf(stderr, format, ap);
+#else
+    fprintf(stderr, "%s:%d:", src_file, src_line);
+    vfprintf(stderr, format, ap);
+#endif
+#endif
     va_end(ap);
 }
 

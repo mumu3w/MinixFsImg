@@ -69,7 +69,7 @@ int main(int argc, char *argv[])
 
 void PrintUsage(const char *str1)
 {
-	printf("(C) Mumu3w@outlook.com  %s  (MinixFsImage 0.02)\n\n", __DATE__);
+	printf("(C) Mumu3w@outlook.com  %s  (MinixFsImage 0.02.1)\n\n", __DATE__);
 	printf("Usage: %s <-a | -c | -h> Image ID Pathname FileName\n", str1);
 	printf("  -a Add file to image\n");
 	printf("  -c Copy file from image\n");

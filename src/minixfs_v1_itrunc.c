@@ -11,6 +11,7 @@ static void free_ind(uint super_block_id, uint block)
 {
     struct buf *bp;
     uint16 *p;
+	int i;
     
     if(!block)
     {
@@ -20,7 +21,7 @@ static void free_ind(uint super_block_id, uint block)
     if(bp = bget(super_block_id, block))
     {
         p = (uint16 *)bp->data;
-        for(int i = 0; i < 512; i++, p++)
+        for(i = 0; i < 512; i++, p++)
         {
             if(*p)
             {
@@ -41,6 +42,7 @@ static void free_dind(uint super_block_id, uint block)
 {
     struct buf *bp;
     uint16 *p;
+	int i;
     
     if(!block)
     {
@@ -50,7 +52,7 @@ static void free_dind(uint super_block_id, uint block)
     if(bp = bget(super_block_id, block))
     {
         p = (uint16 *)bp->data;
-        for(int i = 0; i < 512; i++, p++)
+        for(i = 0; i < 512; i++, p++)
         {
             if(*p)
             {
@@ -69,13 +71,15 @@ static void free_dind(uint super_block_id, uint block)
 *****************************************************************************/
 void itrunc(struct m_inode *mip)
 {
+	int i;
+	
     // 测试有否时普通文件或目录
     if(!(S_ISREG(mip->i_mode) || S_ISDIR(mip->i_mode)))
     {
         return ;
     }
     
-    for(int i = 0; i < 7; i++)
+    for(i = 0; i < 7; i++)
     {
         if(mip->i_zone[i])
         {
