@@ -18,7 +18,7 @@ static int match(int namelen, const char *name, struct dir_entry *de)
         return 0;
     }
     
-    if((strlen(de->name) == namelen) && (!strncmp(de->name, name, namelen))
+    if((strlen(de->name) == namelen) && (!strncmp(de->name, name, namelen)))
     {
         return 1;
     }
